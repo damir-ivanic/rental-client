@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import Dashboard from "./containers/dashboard/Dashboard";
+import { Switch, Route } from "react-router-dom";
+
+const loading = () => <div>Loading ...</div>;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={loading()}>
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+      </Switch>
+    </Suspense>
   );
 }
+
+// const initialResource = fetchRentalPeriod();
+
+// function App() {
+//   const [resource, setResource] = useState(initialResource);
+//   return (
+//     <div>
+//       <ErrorBoundary fallback={<h2>Could not fetch posts.</h2>}>
+//         <Suspense fallback={<h1>Loading...</h1>}>
+//           <Dashboard resource={resource} />
+//           <button onClick={() => setResource(fetchRentalPeriod())}>
+//             Refresh
+//           </button>
+//         </Suspense>
+//       </ErrorBoundary>
+//     </div>
+//   );
+// }
 
 export default App;
